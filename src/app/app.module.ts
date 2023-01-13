@@ -13,8 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {RouterLinkActive, RouterLinkWithHref, RouterOutlet} from "@angular/router";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatListModule} from "@angular/material/list";
+import {AppRoutingModule} from "./app-routing.module";
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import {MatListModule} from "@angular/material/list";
     QuarterStatsComponent,
     RulesComponent,
     AdminComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +38,7 @@ import {MatListModule} from "@angular/material/list";
     RouterOutlet,
     RouterLinkActive,
     RouterLinkWithHref,
-    MatToolbarModule,
-    MatListModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

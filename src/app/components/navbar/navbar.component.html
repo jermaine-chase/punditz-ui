@@ -1,72 +1,46 @@
-<mat-toolbar color="accent">
-EPL Punditz
-</mat-toolbar>
-<mat-toolbar color="primary">
-  <mat-nav-list class="list-horizontal">
-    <mat-list-item>
-      <a href>Home</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Current Stats</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Quarterly Stats</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Picks</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Predictions</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Picks</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a href>Log Out</a>
-    </mat-list-item>
-  </mat-nav-list>
-</mat-toolbar>
-<!--<ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center">
-  <li [ngbNavItem]="1">
-    <a ngbNavLink>Home</a>
-    <ng-template ngbNavContent>
-      <app-dashboard></app-dashboard>
-    </ng-template>
-  </li>
-  <li ngbDropdown class="nav-item">
-    <a href (click)="false" class="nav-link" ngbDropdownToggle>Stats</a>
-    <div ngbDropdownMenu>
-      <button ngbDropdownItem >Current Stats</button>
-      <button ngbDropdownItem>Quarterly Stats</button>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/main">EPL Punditz</a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/main">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Stats
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/cycle-stats">Current Stats</a></li>
+            <li><a class="dropdown-item" routerLink="/quarter-stats">Quarterly Stats</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/picks">Picks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/predictions">Predictions</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+            Admin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/exceptions">Set Exceptions</a></li>
+            <!--<li><a class="dropdown-item" href="#">Refresh Fixtures</a></li>
+            <li><a class="dropdown-item" href="#">Clear Scores</a></li>
+            <li><a class="dropdown-item" href="#">Re-calculate Scores</a></li>-->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Logout</a>
+        </li>
+      </ul>
     </div>
-  </li>
-  <li [ngbNavItem]="2">
-    <a ngbNavLink>Picks</a>
-    <ng-template ngbNavContent>
-      <app-picks></app-picks>
-    </ng-template>
-  </li>
-  <li [ngbNavItem]="3">
-    <a ngbNavLink>Predictions</a>
-    <ng-template ngbNavContent>
-      <app-predictions></app-predictions>
-    </ng-template>
-  </li>
-  <li ngbDropdown class="nav-item">
-    <a href (click)="false" class="nav-link" ngbDropdownToggle>Admin</a>
-    <div ngbDropdownMenu>
-      <button ngbDropdownItem>Set Exceptions</button>
-      <button ngbDropdownItem>Refresh Fixtures</button>
-      <button ngbDropdownItem>Clear Scores</button>
-      <button ngbDropdownItem>Re-calculate Scores</button>
-    </div>
-  </li>
-  <li [ngbNavItem]="4">
-    <a ngbNavLink>Logout</a>
-    <ng-template ngbNavContent>
-      <p>
-        Logout
-      </p>
-    </ng-template>
-  </li>
-</ul>-->
+  </div>
+</nav>

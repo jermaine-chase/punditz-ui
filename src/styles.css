@@ -5,8 +5,8 @@ body, html {
 }
 
 body {
-  /*background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5)), url('../img/jonathan-petersson-ARU18GpF6QQ-unsplash.jpg');
-  Create the parallax scrolling effect */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5)), url('assets/images/jonathan-petersson-ARU18GpF6QQ-unsplash.jpg');
+  /*Create the parallax scrolling effect*/
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

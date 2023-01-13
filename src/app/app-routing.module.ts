@@ -8,15 +8,19 @@ import { QuarterStatsComponent } from './components/quarter-stats/quarter-stats.
 import { RulesComponent } from './components/rules/rules.component';
 import { AdminComponent } from './components/admin/admin.component';
 import {Routes, RouterModule} from "@angular/router";
+import {LoginComponent} from "./components/login/login.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'main', component: DashboardComponent},
-  {path: 'picks/:cycleNumber', component: PicksComponent},
+  {path: 'picks', component: PicksComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'rules', component: RulesComponent},
-  {path: 'cycle-stats/:cycleNumber', component: CycleStatsComponent},
+  {path: 'cycle-stats', component: CycleStatsComponent},
   {path: 'quarter-stats', component: QuarterStatsComponent},
-  {path: 'exceptions/:cycleNumber', component: ExceptionsComponent},
+  {path: 'exceptions', component: ExceptionsComponent},
   {path: 'predictions', component: PredictionsComponent},
   {path: '', redirectTo: '/main', pathMatch: 'full'}
 ]

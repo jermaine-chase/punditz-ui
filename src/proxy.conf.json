@@ -1,0 +1,50 @@
+[
+  {
+    "context": [
+      "/epl/matches"
+    ],
+    "target": "https://api.football-data.org/v2/competitions/2021/matches",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/epl/matches": ""
+    }
+  },
+  {
+    "context": [
+      "/epl/teams"
+    ],
+    "target": "https://api.football-data.org/v2/competitions/2021/teams",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/epl/teams": ""
+    }
+  },
+  {
+    "context": [
+      "/euro/matches"
+    ],
+    "target": "https://api.football-data.org/v2/competitions/2018/matches",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/euro/matches": ""
+    }
+  },
+  {
+    "context": [
+      "/euro/teams"
+    ],
+    "target": "https://api.football-data.org/v2/competitions/2018/teams",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/euro/teams": ""
+    }
+  }
+]

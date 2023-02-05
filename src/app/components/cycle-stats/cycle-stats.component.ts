@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService} from "../../services/backend.service";
+import {Urls} from "../../urls";
 
 @Component({
   selector: 'app-cycle-stats',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cycle-stats.component.css']
 })
 export class CycleStatsComponent implements OnInit {
+  url = '/cycle/'
+  cycle: any;
 
-  constructor() { }
+  constructor(private backend: BackendService) { }
 
   ngOnInit(): void {
+    this.cycle = this.backend.get(Urls.mainUrl + this.url)
   }
 
+  cycleCount() {
+    let list = []
+    for (let i = 1; i <= this.cycle.cycleNumber + 3; i++) {
+      list.push(i)
+    }
+    return list
+  }
 }

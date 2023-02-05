@@ -14,34 +14,17 @@
       <div class="col-md-3 col-sm-3">
           <span class="mySpan">
             <select id="cyclePicker">
-              <option value="1">Cycle 1</option>
-              <option value="2">Cycle 2</option>
-              <option value="3">Cycle 3</option>
-              <option value="4">Cycle 4</option>
-              <option value="5">Cycle 5</option>
-              <option value="6">Cycle 6</option>
-              <option value="7">Cycle 7</option>
-              <option value="8">Cycle 8</option>
-              <option value="9">Cycle 9</option>
-              <option value="10">Cycle 10</option>
-              <option value="11">Cycle 11</option>
-              <option value="12">Cycle 12</option>
-              <option value="13">Cycle 13</option>
-              <option value="14">Cycle 14</option>
-              <option value="15">Cycle 15</option>
-              <option value="16" selected="">Cycle 16</option>
-              <option value="17">Cycle 17</option>
-              <option value="18">Cycle 18</option>
+              <option *ngFor="let c of cycleCount()" value="{{c}}" [selected]="c === cycle.cycleNumber">{{c}}</option>
             </select>
           </span>
       </div>
       <div class="col-md-5 col-sm-5">
-        <button class="btn-primary submitBtn" id="submit_picks">
+        <button class="btn-primary submitBtn" id="submit_picks" (click)="submit()">
           <span class="mySpan">Submit Picks</span>
         </button>
       </div>
       <div class="col-md-4 col-sm-4">
-        <button class="btn-primary submitBtn" id="clear_picks">
+        <button class="btn-primary submitBtn" id="clear_picks" (click)="clear()">
           <span class="mySpan">Clear Picks</span>
         </button>
       </div>
@@ -55,240 +38,24 @@
       <div class="col-md-3 col-sm-3">PICK</div>
       <div class="col-md-3 col-sm-3">POINTS</div>
     </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_0" value="416230">
-      <input type="hidden" id="gameTime_0" value="2022-11-12T12:30:00Z">
-      <input type="hidden" id="gameStage_0" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">151</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 7:30:00 AM</div>
-      <div class="col-md-3 col-sm-3"><select id="team_pick_0">
-        <option selected="">--</option>
-        <option>MCI</option>
-        <option>BRE</option>
-      </select></div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_0">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_1" value="416226">
-      <input type="hidden" id="gameTime_1" value="2022-11-12T15:00:00Z">
-      <input type="hidden" id="gameStage_1" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">152</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 10:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_1">
+    <ng-template *ngFor="let m of getMatches(); let i = index">
+      <div class="row bottom-spacer">
+        <!--<input type="hidden" id="gameId_{{i}}" value="{{i}}"> &lt;!&ndash;value="{{m.id}}">&ndash;&gt;
+        <input type="hidden" id="gameTime_{{i}}" value="{{now}}">&lt;!&ndash;value="{{m.utcDate}}">&ndash;&gt;
+        <input type="hidden" id="gameStage_{{i}}" value="STAGE">&lt;!&ndash;value="{{m.stage}}">&ndash;&gt;-->
+        <div class="col-md-2 col-sm-2">{{m['id']}}</div>
+        <div class="col-md-4 col-sm-4 gameDate">{{m['utcDate']}}</div>
+        <div class="col-md-3 col-sm-3"><select id="team_pick_{{i}}">
           <option selected="">--</option>
-          <option>WHU</option>
-          <option>LEI</option>
-        </select>
+          <option>{{m['homeTeam']['tla']}}</option>
+          <option>{{m['awayTeam']['tla']}}</option>
+        </select></div>
+        <div class="col-md-3 col-sm-3">
+          <select class="points" id="points_pick_{{i}}" (change)="checkSuperPick()">
+            <option *ngFor="let p of points">{{p}}</option>
+          </select>
+        </div>
       </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_1">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_2" value="416227">
-      <input type="hidden" id="gameTime_2" value="2022-11-12T15:00:00Z">
-      <input type="hidden" id="gameStage_2" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">153</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 10:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_2">
-          <option selected="">--</option>
-          <option>TOT</option>
-          <option>LEE</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_2">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_3" value="416228">
-      <input type="hidden" id="gameTime_3" value="2022-11-12T15:00:00Z">
-      <input type="hidden" id="gameStage_3" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">154</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 10:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_3">
-          <option selected="">--</option>
-          <option>NOT</option>
-          <option>CRY</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_3">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_4" value="416231">
-      <input type="hidden" id="gameTime_4" value="2022-11-12T15:00:00Z">
-      <input type="hidden" id="gameStage_4" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">155</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 10:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_4">
-          <option selected="">--</option>
-          <option>LIV</option>
-          <option>SOU</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_4">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_5" value="416234">
-      <input type="hidden" id="gameTime_5" value="2022-11-12T15:00:00Z">
-      <input type="hidden" id="gameStage_5" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">156</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 10:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_5">
-          <option selected="">--</option>
-          <option>BOU</option>
-          <option>EVE</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_5">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <input type="hidden" id="gameId_6" value="416229">
-      <input type="hidden" id="gameTime_6" value="2022-11-12T17:30:00Z">
-      <input type="hidden" id="gameStage_6" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">157</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 12:30:00 PM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_6">
-          <option selected="">--</option>
-          <option>NEW</option>
-          <option>CHE</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_6">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer"><input type="hidden" id="gameId_7" value="416225">
-      <input type="hidden" id="gameTime_7" value="2022-11-12T19:45:00Z">
-      <input type="hidden" id="gameStage_7" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">158</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/12/2022 2:45:00 PM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_7">
-          <option selected="">--</option>
-          <option>WOL</option>
-          <option>ARS</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_7">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer"><input type="hidden" id="gameId_8" value="416233">
-      <input type="hidden" id="gameTime_8" value="2022-11-13T14:00:00Z">
-      <input type="hidden" id="gameStage_8" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">159</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/13/2022 9:00:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_8">
-          <option selected="">--</option>
-          <option>BHA</option>
-          <option>AVL</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_8">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
-    <div class="row bottom-spacer"><input type="hidden" id="gameId_9" value="416232">
-      <input type="hidden" id="gameTime_9" value="2022-11-13T16:30:00Z">
-      <input type="hidden" id="gameStage_9" value="REGULAR_SEASON">
-      <div class="col-md-2 col-sm-2">160</div>
-      <div class="col-md-4 col-sm-4 gameDate">11/13/2022 11:30:00 AM</div>
-      <div class="col-md-3 col-sm-3">
-        <select id="team_pick_9">
-          <option selected="">--</option>
-          <option>FUL</option>
-          <option>MUN</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" id="points_pick_9">
-          <option>--</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>20</option>
-          <option>40</option>
-        </select>
-      </div>
-    </div>
+    </ng-template>
   </form>
 </div>

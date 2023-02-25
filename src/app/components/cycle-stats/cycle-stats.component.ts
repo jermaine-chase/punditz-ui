@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService} from "../../services/backend.service";
-import {Urls} from "../../urls";
 
 @Component({
   selector: 'app-cycle-stats',
@@ -14,7 +13,7 @@ export class CycleStatsComponent implements OnInit {
   constructor(private backend: BackendService) { }
 
   ngOnInit(): void {
-    this.cycle = this.backend.get(Urls.mainUrl + this.url)
+    this.cycle = this.backend.getCycles()
   }
 
   cycleCount() {

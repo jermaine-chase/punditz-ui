@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'quarter-stats', component: QuarterStatsComponent},
   {path: 'exceptions', component: ExceptionsComponent},
   {path: 'predictions', component: PredictionsComponent},
-  {path: '', redirectTo: '/main', pathMatch: 'full'}
+  {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
 

@@ -1,61 +1,46 @@
-import { Injectable } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Location } from '@angular/common'
-import { environment } from '../../environments/environment'
-import { map } from 'rxjs/operators'
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
-import {MatchDTO} from "../model/MatchDTO"
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {lastValueFrom} from 'rxjs';
+import {TeamResponseDTO} from "../model/TeamResponseInterface";
+import {MatchResponseDTO} from "../model/MatchResponseInterface";
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  teams = []
-  matches = []
-  constructor(private http: HttpClient, private location: Location) { }
+  constructor(private http: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'X-Auth-Token': environment.auth_token_val
+      })
+    };
+    this.httpOptions.headers.has('X-Auth-Token')
+  }
 
-  get(url: string, apiv2Call?: boolean) {
-    if (apiv2Call) {
-      const headers = new HttpHeaders()
-        .set(environment.auth_token_key, environment.auth_token_val)
-        .set('Access-Control-Allow-Origin', '*')
-      headers.has(environment.auth_token_key)
-      return this.http.get(url, {headers})
+  private httpOptions: {
+    headers: HttpHeaders
+  }
+
+  async getTeams(leagueId: number) {
+    let url = environment.eplteams
+    if (leagueId === 2018) {
+      url = environment.euroteams
     }
-    return this.http.get(url)
+    return await lastValueFrom(this.http.get<TeamResponseDTO>(url, this.httpOptions));
   }
 
-  post(url: string, obj: any) {
-    return this.http.post(url, obj)
-  }
-
-  put(url: string, obj: any) {
-    return this.http.put(url, obj)
-  }
-
-  getSeason(leagueId: string) {
-    if (!leagueId) {
-      throw Error('League Id is required!');
+  async getMatches(leagueId: number) {
+    let url = environment.eplmatches
+    if (leagueId === 2018) {
+      url = environment.euromatches
     }
-    let url = 'http://localhost:4200/epl/teams';
-    return this.get(url, true);
+    return await lastValueFrom(this.http.get<MatchResponseDTO>(url, this.httpOptions));
   }
 
-  getMatches(leagueId: string) {
-    if (!leagueId) {
-      throw Error('League Id is required!');
-    }
-    let url = 'http://localhost:4200/epl/matches';
-    return this.get(url, true)
+  async getCycles() {
+    let url = environment.cycleUrl
+    return await lastValueFrom(this.http.get<MatchResponseDTO>(url));
   }
 
-  getTeams(leagueId: string) {
-    if (!leagueId) {
-      throw Error('League Id is required!');
-    }
-    let url = 'http://localhost:4200/epl/teams';
-    return this.get(url, true);
-  }
 }

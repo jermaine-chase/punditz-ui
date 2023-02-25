@@ -1,1 +1,63 @@
-<p>register works!</p>
+<html>
+<head>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+        integrity="ha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <title>EPL Punditz - Register</title></head>
+<body cz-shortcut-listen="true">
+<div class="limiter">
+  <div class="container-login">
+    <div class="wrap-login"  *ngIf="!confirm">
+      <form class="login-form validate-form" id="registerForm"method="post">
+        <span class="login-form-title padb-26">Register</span>
+        <div id="error">
+          <div></div>
+        </div>
+        <div class="wrap-input"><input class="input" type="text" name="firstName" placeholder="First Name" [(ngModel)]="user.firstName"></div>
+        <div class="wrap-input"><input class="input" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="user.lastName"></div>
+        <div class="wrap-input validate-input" data-validate="Valid email is: a@b.c">
+          <input class="input" type="text" name="email" placeholder="Email" [(ngModel)]="user.email"></div>
+        <div class="wrap-input"><input class="input" type="text" name="username" placeholder="Username" [(ngModel)]="user.username"></div>
+        <div class="wrap-input validate-input" data-validate="Enter password">
+          <input class="input" type="password" name="password" placeholder="Password"  [(ngModel)]="user.password"></div>
+        <div class="container-login-form-btn">
+          <div class="wrap-login-form-btn">
+            <div class="login-form-bgbtn"></div>
+            <button class="login-form-btn" id="registerBtn" (click)="signUp()">Register</button>
+          </div>
+        </div>
+        <div class="text-center padt-48">
+          <span class="txt1">Already have an account?&nbsp;</span>
+          <a class="txt2" href="#" routerLink="/login">LOGIN</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="wrap-login" *ngIf="confirm">
+      <div class="row">
+        <div class="wrap-input col mb-2">
+          <label for="code" class="form-label">Code:</label>
+          <input type="text" id="code" name="code" #code="ngModel" [(ngModel)]="user.code" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-grid">
+          <button type="button" (click)="confirmSignUp()" class="btn btn-sm btn-success" [disabled]="loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+</html>

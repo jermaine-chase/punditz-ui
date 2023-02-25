@@ -46,5 +46,17 @@
     "pathRewrite": {
       "^/euro/teams": ""
     }
+  },
+  {
+    "context": [
+      "/cycle/file"
+    ],
+    "target": "http://localhost:4200",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/cycle/file": "src/app/json/cycle.json"
+    }
   }
 ]

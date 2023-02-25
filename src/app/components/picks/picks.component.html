@@ -1,9 +1,7 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <form id="cycle_picks">
-    <input id="userId" type="hidden" value="ddf3d0a9-409e-4100-b3a5-f1c2ae1c5919">
-    <input id="sessionId" type="hidden" value="pNcsa4xlaDReU0zEd_tQIp3Y3sj0jmy7">
-    <input id="leagueId" type="hidden" value="2021">
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading" class="container">
+  <form>
     <div class="row header">
       <div class="col-12 text-center" id="header" style="font-size: 90px;">Weekly Picks</div>
     </div>
@@ -32,30 +30,27 @@
     <div class="row header border-t border-l border-r">
       <div class="col-12 text-center" id="error"></div>
     </div>
+    {{picksForm | json}}
     <div class="row border-b border-l border-r bottom-spacer">
-      <div class="col-md-2 col-sm-2">GAME #</div>
+      <div class="col-md-2 col-sm-2">GAME ID</div>
       <div class="col-md-4 col-sm-4">DATE</div>
       <div class="col-md-3 col-sm-3">PICK</div>
       <div class="col-md-3 col-sm-3">POINTS</div>
     </div>
-    <ng-template *ngFor="let m of getMatches(); let i = index">
-      <div class="row bottom-spacer">
-        <!--<input type="hidden" id="gameId_{{i}}" value="{{i}}"> &lt;!&ndash;value="{{m.id}}">&ndash;&gt;
-        <input type="hidden" id="gameTime_{{i}}" value="{{now}}">&lt;!&ndash;value="{{m.utcDate}}">&ndash;&gt;
-        <input type="hidden" id="gameStage_{{i}}" value="STAGE">&lt;!&ndash;value="{{m.stage}}">&ndash;&gt;-->
-        <div class="col-md-2 col-sm-2">{{m['id']}}</div>
-        <div class="col-md-4 col-sm-4 gameDate">{{m['utcDate']}}</div>
-        <div class="col-md-3 col-sm-3"><select id="team_pick_{{i}}">
-          <option selected="">--</option>
-          <option>{{m['homeTeam']['tla']}}</option>
-          <option>{{m['awayTeam']['tla']}}</option>
-        </select></div>
-        <div class="col-md-3 col-sm-3">
-          <select class="points" id="points_pick_{{i}}" (change)="checkSuperPick()">
-            <option *ngFor="let p of points">{{p}}</option>
-          </select>
-        </div>
+    <div class="row bottom-spacer" *ngFor="let m of getMatches(); let i = index">
+      <div class="col-md-2 col-sm-2">{{m.id}}</div>
+      <div class="col-md-4 col-sm-4 gameDate">{{m.localDate}}</div>
+      <div class="col-md-3 col-sm-3">
+      <select id="team_pick_{{i}}" name="team_pick_{{i}}" [(ngModel)]="picksForm.picks[i].team" >
+        <option selected="">--</option>
+        <option>{{m.homeTeam.tla}}</option>
+        <option>{{m.awayTeam.tla}}</option>
+      </select></div>
+      <div class="col-md-3 col-sm-3">
+        <select class="points" name="points_pick_{{i}}" id="points_pick_{{i}}" (change)="checkSuperPick(i)" [(ngModel)]="picksForm.picks[i].points">
+          <option *ngFor="let p of pointsOptions[i].options" [value]="p.value">{{p.label}}</option>
+        </select>
       </div>
-    </ng-template>
+    </div>
   </form>
 </div>

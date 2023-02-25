@@ -9,5 +9,13 @@
 </head>
 <body>
   <app-root></app-root>
+  <!-- your index.html -->
+  <script>
+    /**
+     * this is a hack for dragula
+     * error: global is not defined
+     */
+    var global = global || window
+  </script>
 </body>
 </html>

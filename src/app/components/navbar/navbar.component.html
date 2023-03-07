@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" routerLink="/main">EPL Punditz</a>
+    <a class="navbar-brand" routerLink="/main" (click)="page='main'">EPL Punditz</a>
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
             data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
@@ -8,33 +8,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/main">Home</a>
+          <a class="nav-link" [class.active]="page==='main'" aria-current="page" routerLink="/main" (click)="page='main'">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" [class.active]="page==='stats'" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Stats
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/cycle-stats">Current Stats</a></li>
-            <li><a class="dropdown-item" routerLink="/quarter-stats">Quarterly Stats</a></li>
+            <li><a class="dropdown-item" routerLink="/cycle-stats" (click)="page='stats'">Current Stats</a></li>
+            <li><a class="dropdown-item" routerLink="/quarter-stats" (click)="page='stats'">Quarterly Stats</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/picks">Picks</a>
+          <a class="nav-link" routerLink="/picks" [ngClass]="{'active': page==='picks'}" (click)="page='picks'">Picks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/predictions">Predictions</a>
+          <a class="nav-link" routerLink="/predictions" [ngClass]="{'active': page==='predictions'}" (click)="page='predictions'">Predictions</a>
         </li>
         <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
+          <a class="nav-link dropdown-toggle" href="#" [ngClass]="{'active': page==='admin'}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/exceptions">Set Exceptions</a></li>
-            <!--<li><a class="dropdown-item" href="#">Refresh Fixtures</a></li>
-            <li><a class="dropdown-item" href="#">Clear Scores</a></li>
-            <li><a class="dropdown-item" href="#">Re-calculate Scores</a></li>-->
+            <li><a class="dropdown-item" routerLink="/exceptions" (click)="page='admin'">Set Exceptions</a></li>
+            <!--<li><a class="dropdown-item" routerLink="/users" (click)="page='admin'">Edit Users</a></li>-->
+            <li><a class="dropdown-item" href="#" (click)="page='admin'">Refresh Fixtures</a></li>
+            <li><a class="dropdown-item" href="#" (click)="page='admin'">Clear Scores</a></li>
+            <li><a class="dropdown-item" href="#" (click)="page='admin'">Re-calculate Scores</a></li>
           </ul>
         </li>
         <li class="nav-item">

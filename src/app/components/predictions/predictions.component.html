@@ -1,155 +1,40 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <form id="cycle_picks">
-    <input type="hidden" id="userId" value="ddf3d0a9-409e-4100-b3a5-f1c2ae1c5919">
-    <input type="hidden" id="sessionId" value="2MiB1PLv4bV4rhoBMCsbUC1I262JWTbT">
-    <div class="row header">
-      <div class="col-12 text-center" id="header" style="font-size: 30px;">Predictions</div>
+  <div class="row header">
+    <div class="col-12 text-center" id="header" style="font-size: 30px;">Predictions</div>
+  </div>
+  <div class="row header border-t border-l border-r">
+    <div class="col-12 text-center">Note: Predictions are <em>F I N A L</em>! When submitted, they cannot be
+      changed.
     </div>
-    <div class="row header border-t border-l border-r">
-      <div class="col-12 text-center">Note: Predictions are <em>F I N A L</em>! When submitted, they cannot be
-        changed.
-      </div>
+  </div>
+  <div class="row header border-l border-r text-center">
+    <div class="col">
+      <button class="btn-primary submitBtn" id="submit_predictions">
+        <span class="mySpan">Submit Predictions</span>
+      </button>
     </div>
-    <div class="row header border-l border-r text-center">
-      <div class="col">
-        <button class="btn-primary submitBtn" id="submit_predictions">
-          <span class="mySpan">Submit Predictions</span>
-        </button>
-      </div>
-      <div class="col">
-        <button class="btn-primary submitBtn" id="reset_predictions">
-          <span class="mySpan">Reset Predictions</span>
-        </button>
-      </div>
+    <div class="col">
+      <button class="btn-primary submitBtn" id="reset_predictions">
+        <span class="mySpan">Reset Predictions</span>
+      </button>
     </div>
-    <div class="row header border-t border-l border-r">
-      <div class="col-12 text-center" id="error"></div>
+  </div>
+  <div class="row header border-t border-l border-r">
+    <div class="col-12 text-center" id="error"></div>
+  </div>
+  {{predictionsForm.teams | json}}
+  <div class="row border-b border-l border-r bottom-spacer">
+    <div class="col-md-6 col-sm-6">RANK #</div>
+    <div class="col-md-6 col-sm-6">TEAM</div>
+  </div>
+  <div class="row bottom-spacer" *ngFor="let p of predictionsForm.teams; let i = index">
+    <div class="col-md-6 col-sm-6">{{i + 1}}</div>
+    <div class="col-md-6 col-sm-6">
+      <input name="team_selector_{{i}}" [(ngModel)]="predictionsForm.teams[i]">
+      <!--<div id="suggestions_{{i}}" *ngIf="teamsList[i].length">
+        <p *ngFor="let s of teamsList[i]" (click)="selectOption(i, s)">{{s}}</p>
+      </div>-->
     </div>
-    <div class="row border-b border-l border-r bottom-spacer">
-      <div class="col-md-6 col-sm-6">RANK #</div>
-      <div class="col-md-6 col-sm-6">TEAM</div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">1</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_0" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">2</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_1" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">3</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_2" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">4</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_3" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">5</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_4" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">6</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_5" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">7</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_6" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">8</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_7" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">9</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_8" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">10</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_9" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">11</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_10" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">12</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_11" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">13</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_12" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">14</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_13" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">15</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_14" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">16</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_15" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">17</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_16" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">18</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_17" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">19</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_18" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <div class="row bottom-spacer">
-      <div class="col-md-6 col-sm-6">20</div>
-      <div class="col-md-6 col-sm-6">
-        <input class="selector" id="team_selector_19" onkeyup="autoCompleting(event);">
-      </div>
-    </div>
-    <input type="hidden" id="teamsList" value="Arsenal FC,Aston Villa FC,Chelsea FC,Everton FC,Fulham FC,Liverpool FC,Manchester City FC,Manchester United FC,Newcastle United FC,Tottenham Hotspur FC,Wolverhampton Wanderers FC,Leicester City FC,Southampton FC,Leeds United FC,Nottingham Forest FC,Crystal Palace FC,Brighton &amp; Hove Albion FC,Brentford FC,West Ham United FC,AFC Bournemouth">
-  </form>
+  </div>
 </div>

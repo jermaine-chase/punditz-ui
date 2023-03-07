@@ -1,56 +1,55 @@
 <app-navbar></app-navbar>
 <app-loading *ngIf="loading"></app-loading>
 <div *ngIf="!loading" class="container">
-  <form>
-    <div class="row header">
-      <div class="col-12 text-center" id="header" style="font-size: 90px;">Weekly Picks</div>
-    </div>
-    <div class="row header border-t border-l border-r">
-      <div class="col-12 text-center">Note: Games will be disabled for point entry after they have started.</div>
-    </div>
-    <div class="row header border-l border-r text-center">
-      <div class="col-md-3 col-sm-3">
+  <div class="row header">
+    <div class="col-12 text-center" id="header" style="font-size: 90px;">Weekly Picks</div>
+  </div>
+  <div class="row header border-t border-l border-r">
+    <div class="col-12 text-center">Note: Games will be disabled for point entry after they have started.</div>
+  </div>
+  <div class="row header border-l border-r text-center">
+    <div class="col-md-3 col-sm-3">
           <span class="mySpan">
-            <select id="cyclePicker">
-              <option *ngFor="let c of cycleCount()" value="{{c}}" [selected]="c === cycle.cycleNumber">{{c}}</option>
+            <select [(ngModel)]="cyclePicker" (change)="switchCycle()">
+              <option *ngFor="let c of cycleCount()" value="{{c}}" [selected]="c === cyclePicker">{{c}}</option>
             </select>
           </span>
-      </div>
-      <div class="col-md-5 col-sm-5">
-        <button class="btn-primary submitBtn" id="submit_picks" (click)="submit()">
-          <span class="mySpan">Submit Picks</span>
-        </button>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <button class="btn-primary submitBtn" id="clear_picks" (click)="clear()">
-          <span class="mySpan">Clear Picks</span>
-        </button>
-      </div>
     </div>
-    <div class="row header border-t border-l border-r">
-      <div class="col-12 text-center" id="error"></div>
+    <div class="col-md-5 col-sm-5">
+      <button class="btn-primary submitBtn" id="submit_picks" (click)="submit()">
+        <span class="mySpan">Submit Picks</span>
+      </button>
     </div>
-    {{picksForm | json}}
-    <div class="row border-b border-l border-r bottom-spacer">
-      <div class="col-md-2 col-sm-2">GAME ID</div>
-      <div class="col-md-4 col-sm-4">DATE</div>
-      <div class="col-md-3 col-sm-3">PICK</div>
-      <div class="col-md-3 col-sm-3">POINTS</div>
+    <div class="col-md-4 col-sm-4">
+      <button class="btn-primary submitBtn" id="clear_picks" (click)="clear()">
+        <span class="mySpan">Clear Picks</span>
+      </button>
     </div>
-    <div class="row bottom-spacer" *ngFor="let m of getMatches(); let i = index">
-      <div class="col-md-2 col-sm-2">{{m.id}}</div>
-      <div class="col-md-4 col-sm-4 gameDate">{{m.localDate}}</div>
-      <div class="col-md-3 col-sm-3">
-      <select id="team_pick_{{i}}" name="team_pick_{{i}}" [(ngModel)]="picksForm.picks[i].team" >
+  </div>
+  <div class="row header border-t border-l border-r">
+    <div class="col-12 text-center" id="error"></div>
+  </div>
+  {{picksForm | json}}
+  <div class="row border-b border-l border-r bottom-spacer">
+    <div class="col-md-2 col-sm-2">GAME ID</div>
+    <div class="col-md-4 col-sm-4">DATE</div>
+    <div class="col-md-3 col-sm-3">PICK</div>
+    <div class="col-md-3 col-sm-3">POINTS</div>
+  </div>
+  <div class="row bottom-spacer" *ngFor="let m of getMatches(); let i = index">
+    <div class="col-md-2 col-sm-2">{{m.id}}</div>
+    <div class="col-md-4 col-sm-4 gameDate">{{m.localDate}}</div>
+    <div class="col-md-3 col-sm-3">
+      <select id="team_pick_{{i}}" name="team_pick_{{i}}" [(ngModel)]="picksForm.picks[i].team">
         <option selected="">--</option>
         <option>{{m.homeTeam.tla}}</option>
         <option>{{m.awayTeam.tla}}</option>
       </select></div>
-      <div class="col-md-3 col-sm-3">
-        <select class="points" name="points_pick_{{i}}" id="points_pick_{{i}}" (change)="checkSuperPick(i)" [(ngModel)]="picksForm.picks[i].points">
-          <option *ngFor="let p of pointsOptions[i].options" [value]="p.value">{{p.label}}</option>
-        </select>
-      </div>
+    <div class="col-md-3 col-sm-3">
+      <select class="points" name="points_pick_{{i}}" id="points_pick_{{i}}" (change)="checkSuperPick(i)"
+              [(ngModel)]="picksForm.picks[i].points">
+        <option *ngFor="let p of pointsOptions[i].options" [value]="p.value">{{p.label}}</option>
+      </select>
     </div>
-  </form>
+  </div>
 </div>

@@ -19,6 +19,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import {FormsModule} from "@angular/forms";
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -34,18 +35,19 @@ import {FormsModule} from "@angular/forms";
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    LoadingComponent
+    LoadingComponent,
+    UserComponent
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    RouterOutlet,
-    RouterLinkActive,
-    RouterLinkWithHref,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        RouterOutlet,
+        RouterLinkActive,
+        RouterLinkWithHref,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

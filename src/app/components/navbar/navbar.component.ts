@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService, IUser} from "../../services/auth.service";
+import {SharedService} from "../../shared/shared.service";
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,10 @@ import {AuthService, IUser} from "../../services/auth.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  page: string = '';
   isAuthenticated: boolean;
   user: IUser;
-  constructor(private router: Router, private cognitoService: AuthService) {
+  constructor(private router: Router, private cognitoService: AuthService, private shared: SharedService) {
     this.isAuthenticated = false;
     this.user = {} as IUser;
   }
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
         this.isAuthenticated = success;
         if (success) {
           this.user = await this.cognitoService.getCurrentAuthenticatedUser();
+          this.shared.setUser(this.user)
         }
       });
   }
@@ -34,6 +36,6 @@ export class NavbarComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.cognitoService.isAdmin()
+    return this.user.admin
   }
 }

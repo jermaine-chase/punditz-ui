@@ -13,7 +13,7 @@ export class SharedService {
   private teams : TeamDTO[] = [];
   private matches: MatchDTO[] = [];
   private teamsMap = new Map<number, TeamDTO>();
-  private token: string = '';
+  private user: IUser | undefined;
   constructor(private backend: BackendService) {
     this.populateTeams()
     this.populateMatches()
@@ -67,12 +67,12 @@ export class SharedService {
   setMatches(matches: MatchDTO[] ) {
     this.matches = matches
   }
-  getToken() {
-    return this.token
+  getUser() {
+    return this.user
   }
 
-  setToken(token: string) {
-    this.token = token
+  setUser(user: IUser) {
+    this.user = user
   }
 
   populateUser(result: any): IUser {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedService} from "../../shared/shared.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private shared: SharedService, private auth: AuthService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    if (!this.shared.getUser()) {
+      this.shared.setUser(await this.auth.getCurrentAuthenticatedUser())
+    }
   }
 
+  getUser() {
+    return this.shared.getUser()
+  }
+
+  isAdmin() {
+    return this.getUser()?.admin
+  }
+
+  fetchTeams() {
+
+  }
+
+  fetchMatches() {
+
+  }
+
+  calculateCycleScores() {
+
+  }
+
+  createCycles() {
+
+  }
 }

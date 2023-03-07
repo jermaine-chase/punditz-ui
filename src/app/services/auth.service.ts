@@ -1,7 +1,12 @@
 import {Injectable} from '@angular/core';
+import {
+  ListUsersCommand,
+  CognitoIdentityProviderClient,
+} from '@aws-sdk/client-cognito-identity-provider';
 import {Auth} from 'aws-amplify';
 import {SharedService} from "../shared/shared.service";
 
+import {environment} from "../../environments/environment";
 
 export interface IUser {
   username: string;
@@ -64,6 +69,16 @@ export class AuthService {
   async getCurrentAuthenticatedUser(): Promise<any> {
     let response = await Auth.currentAuthenticatedUser();
     return this.shared.populateUser(response);
+  }
+  async getAllUsers() {
+    const client = new CognitoIdentityProviderClient({ region: environment.region/*, accessKeyId: ''*/ })
+
+    const command = new ListUsersCommand({
+      UserPoolId: environment.cognito.userPoolId
+    });
+
+    //Auth.
+    return await client.send(command);
   }
 
   public async isAdmin() {

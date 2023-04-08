@@ -11,22 +11,24 @@ import {Routes, RouterModule} from "@angular/router";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {UserComponent} from "./components/user/user.component";
+import {AuthGuard} from "./services/auth.guard";
+import {AdminGuard} from "./services/admin.guard";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'main', component: DashboardComponent},
-  {path: 'picks/:cycle', component: PicksComponent},
-  {path: 'picks', component: PicksComponent},
-  {path: 'admin', component: AdminComponent},
+  {path: 'main', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'picks/:cycle', component: PicksComponent, canActivate: [AuthGuard]},
+  {path: 'picks', component: PicksComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: 'rules', component: RulesComponent},
-  {path: 'cycle-stats/:cycle', component: CycleStatsComponent},
-  {path: 'cycle-stats', component: CycleStatsComponent},
-  {path: 'quarter-stats', component: QuarterStatsComponent},
-  {path: 'exceptions/:cycle', component: ExceptionsComponent},
-  {path: 'exceptions', component: ExceptionsComponent},
-  {path: 'predictions', component: PredictionsComponent},
-  {path: 'users', component: UserComponent},
+  {path: 'cycle-stats/:cycle', component: CycleStatsComponent, canActivate: [AuthGuard]},
+  {path: 'cycle-stats', component: CycleStatsComponent, canActivate: [AuthGuard]},
+  {path: 'quarter-stats', component: QuarterStatsComponent, canActivate: [AuthGuard]},
+  {path: 'exceptions/:cycle', component: ExceptionsComponent, canActivate: [AdminGuard]},
+  {path: 'exceptions', component: ExceptionsComponent, canActivate: [AdminGuard]},
+  {path: 'predictions', component: PredictionsComponent, canActivate: [AuthGuard]},
+  {path: 'users', component: UserComponent, canActivate: [AdminGuard]},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 

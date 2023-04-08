@@ -82,9 +82,9 @@ export interface ExceptionForm {
 
 export interface ExceptionCombo {
   gameId: number;
-  gameDate: Date;
+  gameDate: string;
   homeTla: string;
   awayTla: string;
   exception: boolean;
-  exceptionTimestamp: Date;
+  exceptionTimestamp: Date | undefined;
 }

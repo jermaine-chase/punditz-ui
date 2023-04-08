@@ -4,6 +4,7 @@ import {MatchDTO, TeamDTO} from "../../model/MatchResponseInterface";
 import {SharedService} from "../../shared/shared.service";
 import {PicksForm} from "../../shared/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CycleDTO} from "../../model/CycleDTO";
 
 @Component({
   selector: 'app-picks',
@@ -115,10 +116,10 @@ export class PicksComponent implements OnInit {
     },
   ]
   superPickIndex: number = -1;
-  matches: MatchDTO[] = []
   teams:TeamDTO[] = []
-  cycle: any = {cycleNumber: 22}
-  cyclePicker = 0;
+  cycles: CycleDTO[] = []
+  cycle = {} as CycleDTO
+  cyclePicker: number = 0;
   now = new Date()
   loading = false;
   picksForm: PicksForm = {
@@ -174,15 +175,16 @@ export class PicksComponent implements OnInit {
         points: 0
       }]
     }
-  constructor(private router: Router, private route: ActivatedRoute, private backend: BackendService, private share: SharedService) {
+  constructor(private router: Router, private route: ActivatedRoute,
+              private backend: BackendService, private share: SharedService) {
     this.loading = true;
-    this.route.params.subscribe(params => this.cyclePicker = params['cycle']?params['cycle']:this.cycle.cycleNumber)
+    this.route.params.subscribe(params => this.cyclePicker = params['cycle']?parseInt(params['cycle'], 10):this.cycle.cycleNumber)
     this.share.populateTeams().then(
       ()=>{
         this.share.populateMatches().then(
           ()=> {
             this.teams = this.share.getTeams()
-            this.matches = this.share.getMatches()
+            this.cycle = this.share.getCurrentCycle()
             this.loading = false;
             this.setForm();
           }
@@ -200,10 +202,11 @@ export class PicksComponent implements OnInit {
 
   getMatches() {
     console.log('getting matching from ui')
-    if (this.cyclePicker === 0) {
+    if (!this.cyclePicker || this.cyclePicker === 0) {
       this.cyclePicker = this.cycle.cycleNumber;
     }
-    return this.matches.filter(m => m.matchday === this.cyclePicker)
+    const c = this.share.getCycle(this.cyclePicker)
+    return this.share.getMatches().filter(m => c.matches.includes(m.id))
   }
 
   cycleCount() {

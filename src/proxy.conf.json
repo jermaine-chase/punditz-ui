@@ -49,14 +49,14 @@
   },
   {
     "context": [
-      "/cycle/file"
+      "/punditz"
     ],
-    "target": "http://localhost:4200",
-    "secure": false,
+    "target": "https://7pzqr20sch.execute-api.us-east-1.amazonaws.com/punditz",
+    "secure": true,
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
-      "^/cycle/file": "src/app/json/cycle.json"
+      "^/punditz/(.*)$": "/$1"
     }
   }
 ]

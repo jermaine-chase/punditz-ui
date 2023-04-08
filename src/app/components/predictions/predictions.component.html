@@ -10,12 +10,12 @@
   </div>
   <div class="row header border-l border-r text-center">
     <div class="col">
-      <button class="btn-primary submitBtn" id="submit_predictions">
+      <button class="btn-primary submitBtn" (click)="submit()">
         <span class="mySpan">Submit Predictions</span>
       </button>
     </div>
     <div class="col">
-      <button class="btn-primary submitBtn" id="reset_predictions">
+      <button class="btn-primary submitBtn" (click)="reset()">
         <span class="mySpan">Reset Predictions</span>
       </button>
     </div>
@@ -23,18 +23,23 @@
   <div class="row header border-t border-l border-r">
     <div class="col-12 text-center" id="error"></div>
   </div>
-  {{predictionsForm.teams | json}}
-  <div class="row border-b border-l border-r bottom-spacer">
-    <div class="col-md-6 col-sm-6">RANK #</div>
-    <div class="col-md-6 col-sm-6">TEAM</div>
+  <div class="row border-b border-l border-r top-spacer">
+    <div class="col-md-12 col-sm-12 bottom-spacer" style="font-size: 30px;">Ranks</div>
+    <div class="col-md-3 col-sm-3 bottom-spacer" *ngFor="let p of predictionsForm.teams; let i = index">
+      {{i+1}}
+      <span *ngIf="!loadedFromDb">
+        <button type="button" class="btn btn-primary" (click)="removeTeam(i)" *ngIf="p !== ''">{{p}}</button>
+      </span>
+      <span *ngIf="loadedFromDb">
+        {{p}}
+      </span>
+    </div>
   </div>
-  <div class="row bottom-spacer" *ngFor="let p of predictionsForm.teams; let i = index">
-    <div class="col-md-6 col-sm-6">{{i + 1}}</div>
-    <div class="col-md-6 col-sm-6">
-      <input name="team_selector_{{i}}" [(ngModel)]="predictionsForm.teams[i]">
-      <!--<div id="suggestions_{{i}}" *ngIf="teamsList[i].length">
-        <p *ngFor="let s of teamsList[i]" (click)="selectOption(i, s)">{{s}}</p>
-      </div>-->
+  <div class="row border-l border-r" *ngIf="!loadedFromDb"></div>
+  <div class="row border-b border-l border-r bottom-spacer top-spacer" *ngIf="!loadedFromDb">
+    <div class="col-md-12 col-sm-12 bottom-spacer" style="font-size: 30px;">Teams</div>
+    <div class="col-md-3 col-sm-3 bottom-spacer" *ngFor="let a of allTeams; let idx = index">
+      <button type="button" class="btn btn-primary" (click)="chooseTeam(a, idx)">{{a}}</button>
     </div>
   </div>
 </div>

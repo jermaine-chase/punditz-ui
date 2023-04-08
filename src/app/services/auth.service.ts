@@ -22,6 +22,7 @@ export interface IUser {
   providedIn: 'root'
 })
 export class AuthService {
+  private user: any
 
   constructor(private shared: SharedService) { }
 

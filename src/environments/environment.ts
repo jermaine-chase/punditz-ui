@@ -15,7 +15,8 @@ export const environment = {
   cognito: {
     userPoolId: 'us-east-1_mUGF86owd',
     userPoolWebClientId: '3agf7c7dt5gjl01uia8dqibtfm',
-  }
+  },
+  dbUrl: '/punditz'
 };
 
 /*

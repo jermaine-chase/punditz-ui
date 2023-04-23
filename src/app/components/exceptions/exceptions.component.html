@@ -3,7 +3,7 @@
 <div *ngIf="!loading" class="container">
   <div class="row header">
     <div class="col-12 text-center" id="header" style="font-size: 90px;">Game Exceptions</div>
-    <div class="col-12 text-center">{{exceptionForm.exceptions | json}}</div>
+    <!--<div class="col-12 text-center">{{exceptionForm.exceptions | json}}</div>-->
   </div>
   <div class="row header border-t border-l border-r"></div>
   <div class="row header border-l border-r text-center">
@@ -15,7 +15,7 @@
         </span>
     </div>
     <div class="col-md-6 col-sm-6">
-      <button class="btn-primary submitBtn" id="submit_Exceptions">
+      <button class="btn-primary submitBtn" id="submit_Exceptions" (click)="submit()">
         <span class="mySpan">Submit</span>
       </button>
     </div>

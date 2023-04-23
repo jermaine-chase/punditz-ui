@@ -65,6 +65,17 @@ export class ExceptionsComponent implements OnInit {
       }
       this.exceptionForm.exceptions.push(e)
     })
+  }
 
+  submit() {
+    const userName = this.share.getUser()?.username
+    if (!userName) return
+    let postObject = {
+      username: userName,
+      exceptions: this.exceptionForm.exceptions
+    }
+    this.share.saveAwsObject('/exceptions', postObject).then((response)=>{
+      return response
+    })
   }
 }

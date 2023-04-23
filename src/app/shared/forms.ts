@@ -6,6 +6,7 @@ export interface PickCombo {
   gameId: number;
   team: string;
   points: number;
+  disable: boolean;
 }
 
 export interface PredictionsForm {

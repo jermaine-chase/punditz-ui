@@ -186,7 +186,7 @@ export class SharedService {
     return r
   }
 
-  async getAwsObjects(type: string, cycle: number): Promise<any[]> {
+  async getAwsObjects(type: string, cycle: string): Promise<any[]> {
     let rawResponse = await this.awsService.getFromDb('/' + type + '/' + cycle)
     return this.parseAwsResponse(rawResponse)
   }

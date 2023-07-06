@@ -7,6 +7,7 @@ export interface PickCombo {
   team: string;
   points: number;
   disable: boolean;
+  userId: string | undefined;
 }
 
 export interface PredictionsForm {

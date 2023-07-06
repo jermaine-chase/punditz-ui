@@ -122,59 +122,7 @@ export class PicksComponent implements OnInit {
   cyclePicker: number = 0;
   now = new Date()
   loading = false;
-  picksForm: PicksForm = {
-    picks: [
-      {
-        gameId: 0,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 1,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 2,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 3,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 4,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 5,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 6,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 7,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 8,
-        team: '--',
-        points: 0
-      },
-      {
-        gameId: 9,
-        team: '--',
-        points: 0
-      }]
-    }
+  picksForm  = {} as PicksForm
   constructor(private router: Router, private route: ActivatedRoute,
               private backend: BackendService, private share: SharedService) {
     this.loading = true;
@@ -218,66 +166,23 @@ export class PicksComponent implements OnInit {
   }
 
   submit() {
+    const user = this.share.getUser()
     // post picksForm to service
-
+    this.picksForm.picks.forEach(pick => {
+      pick.userId = user?.username
+      this.share.saveAwsObject('/picks', )
+    })
   }
 
   clear() {
-    this.picksForm = {
-      picks: [
-        {
-          gameId: 0,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 1,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 2,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 3,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 4,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 5,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 6,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 7,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 8,
-          team: '--',
-          points: 0
-        },
-        {
-          gameId: 9,
-          team: '--',
-          points: 0
-        }]
-    };
+    this.picksForm.picks = []
     for (let i = 0; i < 10; i++) {
-      this.picksForm.picks[i].gameId = this.getMatches()[i].id
+      this.picksForm.picks.push({
+        gameId: this.getMatches()[i].id,
+        team: '--',
+        points: 0,
+        disable: false
+      })
     }
   }
 
